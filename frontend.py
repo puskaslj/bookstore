@@ -1,5 +1,7 @@
 from tkinter import *
-import backend
+from backend import Database
+
+database = Database()
 
 #function that does an action when an item in the listbox is selected
 def get_selected_row(event):
@@ -20,31 +22,31 @@ def get_selected_row(event):
 
 def view_command():
     inventory.delete(0, END)
-    for row in backend.view():
+    for row in database.view():
         inventory.insert(END, row)
 
 def search_command():
     inventory.delete(0, END)
-    for row in backend.search(book_title_entry.get(), book_author_entry.get(), book_year_entry.get(), book_ISBN_entry.get()):
+    for row in database.search(book_title_entry.get(), book_author_entry.get(), book_year_entry.get(), book_ISBN_entry.get()):
         inventory.insert(END, row)
 
 def add_command():
-    backend.insert(book_title_entry.get(), book_author_entry.get(), book_year_entry.get(), book_ISBN_entry.get())
+    database.insert(book_title_entry.get(), book_author_entry.get(), book_year_entry.get(), book_ISBN_entry.get())
     inventory.delete(0, END)
     #inventory.insert(END, (book_title_entry.get(), book_author_entry.get(), book_year_entry.get(), book_ISBN_entry.get()))
-    for row in backend.view():
+    for row in database.view():
         inventory.insert(END, row)
 
 def delete_command():
-    backend.delete(selected_row[0])
+    database.delete(selected_row[0])
     inventory.delete(0, END)
-    for row in backend.view():
+    for row in database.view():
         inventory.insert(END, row)
 
 def update_command():
-    backend.update(selected_row[0], book_title_entry.get(), book_author_entry.get(), book_year_entry.get(), book_ISBN_entry.get())
+    database.update(selected_row[0], book_title_entry.get(), book_author_entry.get(), book_year_entry.get(), book_ISBN_entry.get())
     inventory.delete(0, END)
-    for row in backend.view():
+    for row in database.view():
         inventory.insert(END, row)
 
 
