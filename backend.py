@@ -2,8 +2,8 @@ import sqlite3
 
 class Database:
 
-    def __init__(self):
-        self.connect_to_db = sqlite3.connect("books.db")
+    def __init__(self, db):
+        self.connect_to_db = sqlite3.connect(db)
         self.cursor = self.connect_to_db.cursor()
         self.cursor.execute("CREATE TABLE IF NOT EXISTS book (id INTEGER PRIMARY KEY, title text, author text, year integer, isbn integer)")
         self.connect_to_db.commit()
